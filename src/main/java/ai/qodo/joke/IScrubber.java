@@ -1,13 +1,12 @@
 package ai.qodo.joke;
 
-public class ImperativeScrubber implements Scrubber {
+public class IScrubber implements Scrubber {
     public String scrub(String joke) {
         StringBuilder scrubbedText = new StringBuilder();
         String[] wordArray = joke.toLowerCase().split("\\s+");
 
         for (String word : wordArray) {
-            String cleanWord = word.replaceAll("[^a-zA-Z]", "");
-            if (swearWords.contains(cleanWord)) {
+            if (swearWords.contains(word)) {
                 scrubbedText.append(REDACTED_WORD);
             } else {
                 scrubbedText.append(word);

@@ -33,7 +33,7 @@ public class CommandLine {
     public static void main(String[] args) {
         CommandFlags commandFlags = new CommandFlags(args);
         LLMCaller llmCaller = new OpenAICaller(OpenAiChatModel.builder());
-        CommandLine commandLine = new CommandLine(new ChuckJoke(), commandFlags, llmCaller, new DeclarativeScrubber());
+        CommandLine commandLine = new CommandLine(new ChuckJoke(), commandFlags, llmCaller, new DScrubber());
         commandLine.start();
     }
 
