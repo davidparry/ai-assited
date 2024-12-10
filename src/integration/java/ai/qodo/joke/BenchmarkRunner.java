@@ -91,8 +91,8 @@ public class BenchmarkRunner {
             As Eleanor stared at the map one last time, she felt a sense of closure. The city of Solace might be gone, but its legacy would live on through their stories.
             
             """;
-    Scrubber imperativeScrubber = new ImperativeScrubber();
-    Scrubber declarativeScrubber = new DeclarativeScrubber();
+    Scrubber iScrubber = new IScrubber();
+    Scrubber dScrubber = new DScrubber();
 
     public static void main(String[] args) throws Exception {
         Options opt = new OptionsBuilder().include(BenchmarkRunner.class.getSimpleName()).result("benchmark-results.scsv") // Output file
@@ -138,14 +138,14 @@ public class BenchmarkRunner {
     @Warmup(iterations = 30, time = 1, timeUnit = TimeUnit.SECONDS)
     @Measurement(iterations = 30, time = 1, timeUnit = TimeUnit.SECONDS)
     public void imperative() {
-        imperativeScrubber.scrub(BenchmarkRunner.WORDS);
+        iScrubber.scrub(BenchmarkRunner.WORDS);
     }
 
     @Benchmark
     @Warmup(iterations = 30, time = 1, timeUnit = TimeUnit.SECONDS)
     @Measurement(iterations = 30, time = 1, timeUnit = TimeUnit.SECONDS)
     public void declarative() {
-        declarativeScrubber.scrub(BenchmarkRunner.WORDS);
+        dScrubber.scrub(BenchmarkRunner.WORDS);
     }
 
 
