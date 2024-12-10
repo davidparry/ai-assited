@@ -79,8 +79,12 @@ This project demonstrates how to leverage AI-assisted coding tools effectively u
 
 ## Demo Project
 
-### Run Performance on Scrubber
-1. ./gradlew clean run
+### Declarative vs Imperative
+1. Ask/Prompt for plugins: ``` implement the following requirements in the scrub method: check if the joke has words that match a word in swearWords from the Scrubber Interface and if so replace with REDACTED_WORD```
+2. Apply response to either D or I Scrubber respectively if response is declarative or imperative. Iterate with 
+   prompt or other techniques to get the desired D or I response.
+3. ./gradlew clean run
+4. Review the console output discuss which implementation is better and discuss how to use AI plugins to get you to this outcome.
 
 ### Run example project 
 1. Add cli argument : -output joke.txt <- this is your minimal needed flag to see output
