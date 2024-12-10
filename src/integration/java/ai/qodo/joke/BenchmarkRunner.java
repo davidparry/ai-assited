@@ -95,7 +95,8 @@ public class BenchmarkRunner {
     Scrubber dScrubber = new DScrubber();
 
     public static void main(String[] args) throws Exception {
-        Options opt = new OptionsBuilder().include(BenchmarkRunner.class.getSimpleName()).result("benchmark-results.scsv") // Output file
+        Options opt = new OptionsBuilder().include(BenchmarkRunner.class.getSimpleName())
+                .result("build/benchmark-results.scsv") // Output file
                 .resultFormat(ResultFormatType.SCSV) // Use SCSV format
                 .forks(1).build();
 
