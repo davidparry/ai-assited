@@ -9,7 +9,7 @@ public interface Scrubber {
 
     /**
      * Checks if the input joke contains any words matching the swearWords Set
-     * and replaces them with REDACTED_WORD. The input will not be null per contract
+     * and replaces them with REDACTED_WORD. The input will not be null per contract the interface.
      *
      * @param joke the text to be checked and scrubbed
      * @return the scrubbed text with any matching swear words replaced
