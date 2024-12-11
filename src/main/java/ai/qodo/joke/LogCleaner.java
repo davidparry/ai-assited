@@ -1,6 +1,6 @@
 package ai.qodo.joke;
 
-public class IScrubber implements Scrubber {
+public class LogCleaner implements Scrubber {
 
     public String scrub(String joke) {
         StringBuilder scrubbedText = new StringBuilder();
