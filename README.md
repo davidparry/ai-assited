@@ -81,11 +81,11 @@ This project demonstrates how to leverage AI-assisted coding tools effectively u
 
 ### Declarative vs Imperative
 1. Ask/Prompt for plugins: 
-``` 
-implement the following requirements in the scrub method: check if the joke has words that match a word in swearWords from the Scrubber Interface and if so replace with REDACTED_WORD. 
 ```
-2. Apply response to either D or I Scrubber respectively if response is declarative or imperative. Iterate with 
-   prompt or other techniques to get the desired D or I response.
+Implement the Scrubber interface, including the required scrub method, and ensure all ScrubberSpec unit tests pass.
+```
+2. Apply response to either DataSanitizer or LogCleaner respectively if response is declarative or imperative. 
+   Iterate with ask or other techniques to get the desired response.
 3. ./gradlew clean run
 4. Review the console output discuss which implementation is better and discuss how to use AI plugins to get you to this outcome.
 
