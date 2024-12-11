@@ -19,8 +19,7 @@ import java.util.concurrent.TimeUnit;
 @State(Scope.Thread)
 @Warmup(iterations = 10, time = 5)
 @Measurement(iterations = 10, time = 5)
-@Fork(value = 5, jvmArgsAppend = {"-Djmh.ignoreLock=true", "-XX:+UseG1GC", "-Xms2g", "-Xmx2g", "-XX:+UseCompressedOops", "-XX" +
-        ":+DisableExplicitGC", "-XX:+AlwaysPreTouch", "-XX:+UseStringDeduplication", "-XX:G1HeapRegionSize=32m", "-XX:+TieredCompilation", "-XX:+UseNUMA"})
+@Fork(value = 5, jvmArgsAppend = {"-Djmh.ignoreLock=true", "-XX:+UseG1GC", "-Xms2g", "-Xmx2g", "-XX:+UseCompressedOops", "-XX" + ":+DisableExplicitGC", "-XX:+AlwaysPreTouch", "-XX:+UseStringDeduplication", "-XX:G1HeapRegionSize=32m", "-XX:+TieredCompilation", "-XX:+UseNUMA"})
 public class BenchmarkRunner {
     public static String WORDS;
 
@@ -48,27 +47,35 @@ public class BenchmarkRunner {
         Collection<RunResult> results = new Runner(opt).run();
 
         // Analyze results and calculate performance difference
-        double declarativeScore = 0;
-        double imperativeScore = 0;
-
+        double logCleaner = 0;
+        double dataSanitizer = 0;
         for (RunResult result : results) {
             String benchmarkName = result.getParams().getBenchmark();
             double score = result.getPrimaryResult().getScore();
+            double error = result.getPrimaryResult().getStatistics().getMeanErrorAt(0.99); // 99% confidence interval
+            double errorRatio = (error / score) * 100;
 
-            if (benchmarkName.endsWith("declarative")) {
-                declarativeScore = score;
-            } else if (benchmarkName.endsWith("imperative")) {
-                imperativeScore = score;
+            if (benchmarkName.endsWith("logCleaner")) {
+                logCleaner = score;
+            } else if (benchmarkName.endsWith("dataSanitizer")) {
+                dataSanitizer = score;
+            }
+
+            System.out.printf("%s:%n", benchmarkName);
+            System.out.printf("  Error Ratio: %.2f%%%n", errorRatio);
+            if (errorRatio >= 6.0) {
+                System.out.printf("  WARNING: Error ratio of %.2f%% is questionable (>5%%)%n", errorRatio);
             }
         }
 
-        if (declarativeScore > 0 && imperativeScore > 0) {
-            if (declarativeScore < imperativeScore) {
-                double slowerPercentage = ((imperativeScore - declarativeScore) / declarativeScore) * 100;
-                System.out.printf("DeclarativeScrubber is %.2f%% faster than ImperativeScrubber.%n", slowerPercentage);
-            } else if (declarativeScore > imperativeScore) {
-                double slowerPercentage = ((declarativeScore - imperativeScore) / imperativeScore) * 100;
-                System.out.printf("ImperativeScrubber is %.2f%% faster than DeclarativeScrubber.%n", slowerPercentage);
+
+        if (logCleaner > 0 && dataSanitizer > 0) {
+            if (logCleaner < dataSanitizer) {
+                double slowerPercentage = ((dataSanitizer - logCleaner) / logCleaner) * 100;
+                System.out.printf("logCleaner is %.2f%% faster than dataSanitizer.%n", slowerPercentage);
+            } else if (logCleaner > dataSanitizer) {
+                double slowerPercentage = ((logCleaner - dataSanitizer) / dataSanitizer) * 100;
+                System.out.printf("dataSanitizer is %.2f%% faster than logCleaner.%n", slowerPercentage);
             } else {
                 System.out.println("Both scrubbers have the same performance.");
             }
@@ -87,12 +94,12 @@ public class BenchmarkRunner {
     }
 
     @Benchmark
-    public void imperative() {
+    public void logCleaner() {
         logCleaner.scrub(BenchmarkRunner.WORDS);
     }
 
     @Benchmark
-    public void declarative() {
+    public void dataSanitizer() {
         dataSanitizer.scrub(BenchmarkRunner.WORDS);
     }
 
