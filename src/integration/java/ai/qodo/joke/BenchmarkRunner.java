@@ -37,8 +37,8 @@ public class BenchmarkRunner {
         WORDS = builder.toString();
     }
 
-    Scrubber iScrubber = new IScrubber();
-    Scrubber dScrubber = new DScrubber();
+    Scrubber logCleaner = new LogCleaner();
+    Scrubber dataSanitizer = new DataSanitizer();
 
     public static void main(String[] args) throws Exception {
         Options opt = new OptionsBuilder().include(BenchmarkRunner.class.getSimpleName()).result("build/benchmark-results.scsv") // Output file
@@ -82,18 +82,18 @@ public class BenchmarkRunner {
     @Setup(Level.Trial)             // Changed to Trial level
     public void setup() {
         // Pre-initialize scrubbers
-        iScrubber.scrub("test");    // Warm up the scrubbers
-        dScrubber.scrub("test");
+        logCleaner.scrub("test");    // Warm up the scrubbers
+        dataSanitizer.scrub("test");
     }
 
     @Benchmark
     public void imperative() {
-        iScrubber.scrub(BenchmarkRunner.WORDS);
+        logCleaner.scrub(BenchmarkRunner.WORDS);
     }
 
     @Benchmark
     public void declarative() {
-        dScrubber.scrub(BenchmarkRunner.WORDS);
+        dataSanitizer.scrub(BenchmarkRunner.WORDS);
     }
 
 
