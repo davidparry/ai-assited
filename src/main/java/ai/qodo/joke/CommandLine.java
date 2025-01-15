@@ -32,7 +32,8 @@ public class CommandLine {
 
     public static void main(String[] args) {
         CommandFlags commandFlags = new CommandFlags(args);
-        LLMCaller llmCaller = new OpenAICaller(OpenAiChatModel.builder());
+        //LLMCaller llmCaller = new OpenAICaller(OpenAiChatModel.builder());
+        LLMCaller llmCaller = new Phi4Caller();
         CommandLine commandLine = new CommandLine(new ChuckJoke(), commandFlags, llmCaller, new DataSanitizer());
         commandLine.start();
     }
@@ -47,7 +48,11 @@ public class CommandLine {
                 if (input.equalsIgnoreCase("Q")) {
                     break;
                 }
-                author(input, flags.getFlagValue("output"));
+                Optional<String> path = Optional.of("jokes.txt");
+                if(flags.getFlagValue("output").isPresent()) {
+                    path = flags.getFlagValue("output");
+                }
+                author(input, path);
             }
         } finally {
             System.out.println("Shutting Down...");

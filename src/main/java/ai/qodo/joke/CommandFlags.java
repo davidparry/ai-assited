@@ -34,7 +34,7 @@ public class CommandFlags {
     }
 
     public Optional<String> getFlagValue(String flag) {
-        return flags.get(flag);
+        return flags.getOrDefault(flag, Optional.empty());
     }
 
     @Override
