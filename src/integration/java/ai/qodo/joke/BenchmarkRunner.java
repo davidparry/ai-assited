@@ -2,10 +2,7 @@ package ai.qodo.joke;
 
 import static ai.qodo.joke.BenchmarkResultsPrinter.printBenchmarkReport;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Collection;
@@ -41,6 +38,7 @@ public class BenchmarkRunner {
   Scrubber logCleaner = new LogCleaner();
   Scrubber dataSanitizer = new DataSanitizer();
   private String data;
+
   public static void main(String[] args) throws Exception {
     BenchmarkRunner runner = new BenchmarkRunner();
     BenchmarkResult results = runner.runBenchMark();
@@ -68,16 +66,10 @@ public class BenchmarkRunner {
     double dataSanitizerScore = scores.getOrDefault("ai.qodo.joke.BenchmarkRunner.dataSanitizer", 0.0);
 
     return switch (Double.compare(logCleanerScore, dataSanitizerScore)) {
-      case -1 -> new BenchmarkResult(
-          "ai.qodo.joke.BenchmarkRunner.logCleaner",  // Lower score is faster
-          ((dataSanitizerScore - logCleanerScore) / dataSanitizerScore) * 100,
-          metrics
-      );
-      case 1 -> new BenchmarkResult(
-          "ai.qodo.joke.BenchmarkRunner.dataSanitizer",  // Lower score is faster
-          ((logCleanerScore - dataSanitizerScore) / logCleanerScore) * 100,
-          metrics
-      );
+      case -1 -> new BenchmarkResult("ai.qodo.joke.BenchmarkRunner.logCleaner",  // Lower score is faster
+          ((dataSanitizerScore - logCleanerScore) / dataSanitizerScore) * 100, metrics);
+      case 1 -> new BenchmarkResult("ai.qodo.joke.BenchmarkRunner.dataSanitizer",  // Lower score is faster
+          ((logCleanerScore - dataSanitizerScore) / logCleanerScore) * 100, metrics);
       default -> new BenchmarkResult("equal", 0.0, metrics);
     };
 
