@@ -6,7 +6,7 @@ public class LogCleaner implements Scrubber {
 
     @Override
     public String scrub(String joke) {
-        return joke;
+        return null;
     }
 
 }
