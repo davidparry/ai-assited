@@ -31,7 +31,7 @@ public class DataSanitizer implements Scrubber {
      * @return either REDACTED_WORD if the word is in swearWords, or the original word
      */
     private String processWord(String word) {
-        return swearWords.contains(word.toLowerCase())
+        return swearWords != null && swearWords.contains(word.toLowerCase())
                ? REDACTED_WORD
                : word;
     }
