@@ -1,30 +1,31 @@
 package ai.qodo.joke;
 
-
-import java.util.Arrays;
 import java.util.Objects;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class DataSanitizer implements Scrubber {
 
-    @Override
-    public String scrub(String joke) {
-        Objects.requireNonNull(joke, "Input joke cannot be null");
+  private static final String REDACTED_WORD = "REDACTED";
 
-        if (joke.isEmpty()) {
-            return joke;
-        }
+  public DataSanitizer() {
+  }
 
-        return Arrays.stream(joke.split("\\s+"))
-                .map(this::scrubWord)
-                .collect(Collectors.joining(" "));
+  @Override
+  public String scrub(String joke) {
+    Objects.requireNonNull(joke, "Joke cannot be null");
+
+    if (swearWords.isEmpty()) {
+      return joke;
     }
 
-    private String scrubWord(String word) {
-        return swearWords.stream()
-                .anyMatch(swear -> word.toLowerCase().equals(swear.toLowerCase()))
-                ? REDACTED_WORD
-                : word;
-    }
+    // Create a pattern to match whole words only
+    var wordBoundaryPattern =
+        swearWords.stream().map(word -> "\\b" + Pattern.quote(word) + "\\b").collect(Collectors.joining("|"));
 
+    var pattern = Pattern.compile(wordBoundaryPattern, Pattern.CASE_INSENSITIVE);
+    var matcher = pattern.matcher(joke);
+
+    return matcher.replaceAll(REDACTED_WORD);
+  }
 }
