@@ -60,7 +60,7 @@ abstract class ScrubberSpec extends Specification {
     }
 
     // null value passed
-    def "should return null when null value passed"() {
+    def "should throw NullPointerException when null value passed"() {
         given:
         def scrubber = scrubberFactory()
         def input = null
