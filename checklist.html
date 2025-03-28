@@ -1,0 +1,356 @@
+<html lang="en">
+<meta charset="UTF-8"/>
+<title>Demo Checklist & Best Practices</title>
+<style>
+    /* Existing Dracula theme colors */
+    :root {
+        --dracula-background: #282a36;
+        --dracula-current-line: #44475a;
+        --dracula-foreground: #f8f8f2;
+        --dracula-comment: #6272a4;
+        --dracula-purple: #bd93f9;
+        --dracula-border: #44475a;
+    }
+
+    /* Existing styles */
+    body {
+        background-color: var(--dracula-background);
+        color: var(--dracula-foreground);
+        font-family: system-ui, -apple-system, sans-serif;
+        padding: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: var(--dracula-background);
+    }
+
+    th:nth-child(3),
+    td:nth-child(3) {
+        width: 300px;
+        max-width: 300px;
+        word-wrap: break-word;
+    }
+
+    th, td {
+        padding: 8px;
+        border: 1px solid var(--dracula-border);
+    }
+
+    th {
+        background-color: var(--dracula-current-line);
+        color: var(--dracula-purple);
+    }
+
+    pre {
+        margin: 0;
+        white-space: pre-wrap;
+        background-color: var(--dracula-current-line);
+        padding: 4px;
+        border-radius: 4px;
+    }
+
+    a {
+        color: var(--dracula-purple);
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    ol {
+        color: var(--dracula-foreground);
+    }
+
+    tr:nth-child(even) {
+        background-color: var(--dracula-current-line);
+    }
+
+    /* New styles for copy functionality */
+    .copy-container {
+        position: relative;
+        display: flex;
+        align-items: start;
+        gap: 8px;
+    }
+
+    .copy-btn {
+        background-color: var(--dracula-purple);
+        color: var(--dracula-background);
+        border: none;
+        border-radius: 4px;
+        padding: 4px 8px;
+        cursor: pointer;
+        font-size: 12px;
+        transition: opacity 0.2s;
+    }
+
+    .copy-btn:hover {
+        opacity: 0.8;
+    }
+
+    .copy-btn.copied {
+        background-color: #50fa7b;
+    }
+
+    .content-wrapper {
+        flex-grow: 1;
+    }
+</style>
+</head>
+<body>
+
+<h2>Demo Checklist</h2>
+
+<h2>Best Practices</h2>
+<ol>
+    <li>Break Requests into Smaller, Focused Units of Work</li>
+    <li>Provide Context and Use Previous Conversations</li>
+    <li>Use Predefined Commands to Enhance Precision</li>
+    <li>Seek Clarifications and Explanations When Needed</li>
+</ol>
+
+<table>
+    <thead>
+    <tr>
+        <th>Task</th>
+        <th>Category</th>
+        <th>Ask - Instruction</th>
+        <th>Command/Ask</th>
+        <th>BP</th>
+        <th>Tool</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><input type="checkbox"/></td>
+        <td>Requirements</td>
+        <td>Review Requirements</td>
+        <td>
+            <a href="https://qodo-confluence.atlassian.net/browse/SCRUM-5">Jira Ticket</a>
+        </td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><input type="checkbox"/></td>
+        <td>Onboarding</td>
+        <td>
+            <div class="copy-container">
+                <div class="content-wrapper">
+                    <pre><code>how do you run this project?</code></pre>
+                </div>
+                <button class="copy-btn">Copy</button>
+            </div>
+        </td>
+        <td>
+            <a href="images/run.png">/ask</a>
+        </td>
+        <td>
+            <a href="best_practices_for_ai_tools.md#1-break-requests-into-smaller-focused-units-of-work">1</a>,
+            <a href="best_practices_for_ai_tools.md#2-provide-context-and-use-previous-conversations">2</a>
+        </td>
+        <td>Qodo Gen</td>
+    </tr>
+    <tr>
+        <td><input type="checkbox"/></td>
+        <td>Onboarding</td>
+        <td>
+            <div class="copy-container">
+                <div class="content-wrapper">
+                    <pre><code>explain this project.</code></pre>
+                </div>
+                <button class="copy-btn">Copy</button>
+            </div>
+        </td>
+        <td>
+            <a href="images/explain.png">/ask</a>
+        </td>
+        <td>
+            <a href="best_practices_for_ai_tools.md#1-break-requests-into-smaller-focused-units-of-work">1</a>,
+            <a href="best_practices_for_ai_tools.md#2-provide-context-and-use-previous-conversations">2</a>
+        </td>
+        <td>Qodo Gen</td>
+    </tr>
+    <tr>
+        <td><input type="checkbox"/></td>
+        <td>Onboarding</td>
+        <td>
+            <pre><code>/explain</code></pre>
+        </td>
+        <td>
+            <a href="images/cmd_explain.png">/explain</a>
+        </td>
+        <td>
+            <a href="best_practices_for_ai_tools.md#3-use-predefined-commands-to-enhance-precision">3</a>,
+            <a href="best_practices_for_ai_tools.md#4-seek-clarifications-and-explanations-when-needed">4</a>
+        </td>
+        <td>AI Assistant</td>
+    </tr>
+    <tr>
+        <td><input type="checkbox"/></td>
+        <td>Test</td>
+        <td>
+            <pre><code>/test-suite</code></pre>
+        </td>
+        <td>
+            <a href="images/test-suite.png">/test-suite</a>
+        </td>
+        <td>
+            <a href="best_practices_for_ai_tools.md#2-provide-context-and-use-previous-conversations">2</a>,
+            <a href="best_practices_for_ai_tools.md#3-use-predefined-commands-to-enhance-precision">3</a>
+        </td>
+        <td>Qodo Gen</td>
+    </tr>
+    <tr>
+        <td><input type="checkbox"/></td>
+        <td>TDD</td>
+        <td>run current LogCleanerSpec, DataSanitizerSpec</td>
+        <td>
+            <a href="images/spock.png">spockframework</a>
+        </td>
+        <td>-</td>
+        <td>JUnitPlatform</td>
+    </tr>
+    <tr>
+        <td><input type="checkbox"/></td>
+        <td>Code</td>
+        <td>
+            <div class="copy-container">
+                <div class="content-wrapper">
+                    <pre><code>implement the scrub requirements from the javadoc in Scrubber interface in the LogCleaner</code></pre>
+                </div>
+                <button class="copy-btn">Copy</button>
+            </div>
+        </td>
+        <td>
+            <a href="images/imperative_resp.png">/ask</a>
+        </td>
+        <td>
+            <a href="best_practices_for_ai_tools.md#1-break-requests-into-smaller-focused-units-of-work">1</a>,
+            <a href="best_practices_for_ai_tools.md#2-provide-context-and-use-previous-conversations">2</a>
+        </td>
+        <td>Copilot</td>
+    </tr>
+    <tr>
+        <td><input type="checkbox"/></td>
+        <td>Code</td>
+        <td>
+            <div class="content-wrapper">
+                <pre><code>implement the scrub requirements from the javadoc in Scrubber interface in the DataSanitizer</code></pre>
+            </div>
+            <button class="copy-btn">Copy</button>
+            </div>
+        </td>
+        <td>
+            <a href="images/declarative.png">/ask</a>
+        </td>
+        <td>
+            <a href="best_practices_for_ai_tools.md#1-break-requests-into-smaller-focused-units-of-work">1</a>,
+            <a href="best_practices_for_ai_tools.md#2-provide-context-and-use-previous-conversations">2</a>
+        </td>
+        <td>Qodo Gen</td>
+    </tr>
+    <tr>
+        <td><input type="checkbox"/></td>
+        <td>Benchmark</td>
+        <td>run BenchmarkRunnerSpec - review the winner and discuss imperative vs declarative</td>
+        <td>
+            <a href="images/benchmark.png">spockframework</a>
+        </td>
+        <td>-</td>
+        <td>Java Microbenchmark Harness</td>
+    </tr>
+    <tr>
+        <td><input type="checkbox"/></td>
+        <td>Code</td>
+        <td>
+          <pre><code>/refactor
+select LogCleaner method
+rerun Benchmark if time permits</code></pre>
+        </td>
+        <td>
+            <a href="images/refactor.png">/refactor</a>
+        </td>
+        <td>
+            <a href="best_practices_for_ai_tools.md#2-provide-context-and-use-previous-conversations">2</a>,
+            <a href="best_practices_for_ai_tools.md#3-use-predefined-commands-to-enhance-precision">3</a>
+        </td>
+        <td>AI Assistant</td>
+    </tr>
+    <tr>
+        <td><input type="checkbox"/></td>
+        <td>Judge(Model vs Model)</td>
+        <td>
+            <div class="content-wrapper">
+             <pre><code>implement the javadoc requirement
+judge the response grade it from A - F tell me your grade and if it is less than A- then give your correction to make it an A+</code></pre>
+            </div>
+            <button class="copy-btn">Copy</button>
+            </div>
+
+
+        </td>
+        <td>
+            <a href="images/model_grade.png">/ask</a>
+        </td>
+        <td>
+            <a href="best_practices_for_ai_tools.md#2-provide-context-and-use-previous-conversations">2</a>,
+            <a href="best_practices_for_ai_tools.md#4-seek-clarifications-and-explanations-when-needed">4</a>
+        </td>
+        <td>Qodo Gen</td>
+    </tr>
+    <tr>
+        <td><input type="checkbox"/></td>
+        <td>Merge Request</td>
+        <td>Create Merge Request</td>
+        <td>
+            <a href="https://github.com/davidparry/ai-assited/compare/60-min-talk...SCRUM-5-Implement-Scrubber-and-Evil-Joke">Github</a>
+        </td>
+        <td></td>
+        <td>Qodo Merge</td>
+    </tr>
+    </tbody>
+</table>
+
+<script>
+    document.querySelectorAll('.copy-btn').forEach(button => {
+        button.addEventListener('click', async () => {
+            // Get the content container
+            const container = button.previousElementSibling;
+            let textToCopy;
+
+            // Check if the container has a pre/code element
+            const codeElement = container.querySelector('code');
+            if (codeElement) {
+                textToCopy = codeElement.textContent;
+            } else {
+                textToCopy = container.textContent;
+            }
+
+            try {
+                await navigator.clipboard.writeText(textToCopy);
+
+                // Visual feedback
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+
+                // Reset button after 2 seconds
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                    button.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                console.error('Failed to copy text:', err);
+                button.textContent = 'Failed!';
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                }, 2000);
+            }
+        });
+    });
+</script>
+</body>
+</html>
