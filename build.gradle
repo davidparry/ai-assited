@@ -34,7 +34,6 @@ dependencies {
     testImplementation "org.spockframework:spock-junit4"
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'net.bytebuddy:byte-buddy:1.14.4'
-
 }
 
 application {
