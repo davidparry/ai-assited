@@ -6,7 +6,7 @@
 
 ## Project Overview
 
-This project demonstrates how to leverage AI-assisted coding tools effectively using the **8 Best Practices**. These practices ensure efficiency, clarity, and high-quality results while working with AI coding assistants. Below is a breakdown of these practices and their applications.
+This project demonstrates how to leverage AI-assisted coding tools effectively using the **4 Best Practices**. These practices ensure efficiency, clarity, and high-quality results while working with AI coding assistants. Below is a breakdown of these practices and their applications.
 
 ---
 
