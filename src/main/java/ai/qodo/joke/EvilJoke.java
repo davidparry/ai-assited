@@ -15,6 +15,10 @@ public class EvilJoke implements Joke {
     this.httpClient = HttpClient.newBuilder().version(HttpClient.Version.HTTP_2).build();
   }
 
+  public EvilJoke(HttpClient client) {
+    httpClient = client;
+  }
+
   @Override
   public String joke(String name) {
     return Optional.ofNullable(name).filter(Predicate.not(String::isBlank)).map(this::generateJoke)
