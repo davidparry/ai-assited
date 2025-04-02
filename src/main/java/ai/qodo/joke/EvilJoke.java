@@ -20,8 +20,8 @@ public class EvilJoke implements Joke {
   }
 
   @Override
-  public String joke() {
-    return generateJoke("Buster Keaton");
+  public String joke(String name) {
+    return generateJoke(name);
   }
 
   private String generateJoke(String name) {
