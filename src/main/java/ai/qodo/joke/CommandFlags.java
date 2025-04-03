@@ -23,7 +23,6 @@ public class CommandFlags {
                         flags.put(flag, Optional.ofNullable(args[i + 1]));
                         i++; // Skip the value in the next iteration
                     }
-                    //flags.put(flag, value);
                 }
             }
         }

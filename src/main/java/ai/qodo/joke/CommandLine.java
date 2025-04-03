@@ -32,7 +32,8 @@ public class CommandLine {
 
     public static void main(String[] args) {
         CommandFlags commandFlags = new CommandFlags(args);
-        LLMCaller llmCaller = new Phi4Caller();
+        OpenAiChatModel.OpenAiChatModelBuilder chatModelBuilder = OpenAiChatModel.withApiKey(System.getenv("OPENAI_API_KEY")).builder();
+        LLMCaller llmCaller = new OpenAICaller(chatModelBuilder);
         CommandLine commandLine = new CommandLine(new ChuckJoke(), commandFlags, llmCaller, new DataSanitizer());
         commandLine.start();
     }
