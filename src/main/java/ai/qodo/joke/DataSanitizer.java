@@ -16,7 +16,9 @@ public class DataSanitizer implements Scrubber {
     public String scrub(String joke) {
         Objects.requireNonNull(joke, "Joke cannot be null");
 
-        return Arrays.stream(joke.split("\\s+")).map(word -> containsSwearWord(word) ? REDACTED_WORD : word).collect(Collectors.joining(" "));
+        return Arrays.stream(joke.split("\\s+"))
+                .map(word -> containsSwearWord(word) ? REDACTED_WORD : word)
+                .collect(Collectors.joining(" "));
     }
 
     private boolean containsSwearWord(String word) {
