@@ -17,7 +17,10 @@ public class DataSanitizer implements Scrubber {
         Objects.requireNonNull(joke, "Joke cannot be null");
 
         return Arrays.stream(joke.split("\\s+"))
-                .map(word -> containsSwearWord(word) ? REDACTED_WORD : word)
+                .map(word -> switch(word) {
+                    case String s when containsSwearWord(s) -> REDACTED_WORD;
+                    default -> word;
+                })
                 .collect(Collectors.joining(" "));
     }
 
