@@ -1,3 +1,10 @@
+## 2025-04-11
+
+### Added
+- Enhanced text sanitization with improved swear word detection and replacement [*](https://github.com/David-Parry/ai-assited/pull/28)
+- Implemented stream-based processing for efficient text sanitization
+- Removed unused test files and improved code documentation
+
 ## 2025-04-09
 
 ### Added
