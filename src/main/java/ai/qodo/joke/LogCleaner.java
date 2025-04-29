@@ -9,8 +9,14 @@ public class LogCleaner implements Scrubber {
 
     @Override
     public String scrub(String joke) {
-        if (joke == null) {
-            throw new NullPointerException("Input joke must not be null");
+        @Override
+        public String scrub(String joke) {
+            Objects.requireNonNull(joke, "Input joke must not be null");
+    
+            // Split on word boundaries, replace swear words, and rejoin
+            return Arrays.stream(joke.split("\\b"))
+                    .map(word -> swearWords.contains(word.toLowerCase()) ? REDACTED_WORD : word)
+                    .collect(Collectors.joining());
         }
         
         // Split on word boundaries, replace swear words, and rejoin
