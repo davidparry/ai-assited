@@ -17,13 +17,11 @@ public class CommandFlags {
                 String arg = args[i];
                 if (arg.startsWith("-")) {
                     String flag = arg.substring(1);
-                    String value = null;
                     if (i + 1 < args.length && !args[i + 1].startsWith("-")) {
-                        value = args[i + 1];
-                        flags.put(flag, Optional.ofNullable(args[i + 1]));
-                        i++; // Skip the value in the next iteration
+                        flags.put(flag, Optional.ofNullable(args[++i]));
+                    } else {
+                        flags.put(flag, Optional.empty());
                     }
-                    //flags.put(flag, value);
                 }
             }
         }
