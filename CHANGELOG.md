@@ -1,3 +1,11 @@
+## 2025-05-15
+
+### Added
+- Implemented Scrubber interface with LogCleaner implementation [*](https://github.com/David-Parry/ai-assited/pull/38)
+- Added benchmarking tools with metrics collection and results reporting
+- Created EvilJoke stub for future API integration
+- Enhanced documentation with best practices and demo checklists
+
 ## 2025-05-14
 
 ### Added
