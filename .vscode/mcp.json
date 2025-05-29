@@ -1,0 +1,15 @@
+{
+    "servers": {
+         "scout-server": {
+            "command": "java",
+            "args": [
+                "-jar",
+                "/Users/davidparry/code/github/mcp-servers/build-scout/build/libs/scout-1.0.20.jar"
+            ],
+            "env": {
+                "BUILD_SCOUT_LOGGING": "true"
+            }
+        }
+
+         }
+}
