@@ -1,3 +1,10 @@
+## 2025-06-03 [*](https://github.com/David-Parry/ai-assited/pull/52)
+
+### Added
+- Implemented joke scrubbing functionality in DataSanitizer and LogCleaner classes
+- Added null-check validation and regex pattern matching for content filtering
+- Enhanced text processing with case-insensitive word boundary detection
+
 ## 2025-05-29 [*](https://github.com/David-Parry/ai-assited/pull/51)
 
 ### Added
