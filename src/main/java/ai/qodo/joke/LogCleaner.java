@@ -7,7 +7,7 @@ public class LogCleaner implements Scrubber {
 
     @Override
     public String scrub(String joke) {
-        Objects.requireNonNull(joke, "Joke cannot be null");
+        Objects.requireNonNull(joke, "Log content to be scrubbed cannot be null");
 
         return swearWords.stream()
                 .reduce(joke, (text, word) -> Pattern.compile("\\b" + Pattern.quote(word) + "\\b", Pattern.CASE_INSENSITIVE)
