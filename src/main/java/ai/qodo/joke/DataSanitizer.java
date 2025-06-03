@@ -9,8 +9,11 @@ public class DataSanitizer implements Scrubber {
     public String scrub(String joke) {
         Objects.requireNonNull(joke, "Input joke must not be null");
         // Replace each swear word (case-insensitive, whole word) with REDACTED_WORD
-        return swearWords.stream()
-                .reduce(joke, (text, swear) -> Pattern.compile("\\b" + Pattern.quote(swear) + "\\b", Pattern.CASE_INSENSITIVE)
-                        .matcher(text).replaceAll(REDACTED_WORD), (s1, s2) -> s1);
+        var jokeText = joke;
+        for (var swear : swearWords) {
+            var pattern = Pattern.compile("\\b" + Pattern.quote(swear) + "\\b", Pattern.CASE_INSENSITIVE);
+            jokeText = pattern.matcher(jokeText).replaceAll(REDACTED_WORD);
+        }
+        return jokeText;
     }
 }
