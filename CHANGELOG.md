@@ -1,3 +1,11 @@
+## 2025-10-20 [*](https://github.com/David-Parry/ai-assited/pull/54)
+
+### Added
+- Implemented joke scrubbing with regex and stream-based approaches
+- Introduced Validator functional interface with composable operators
+- Added Odd/Even categorization API with filtering/counting/searching
+- Expanded test coverage for CommandFlags, Validator, and OddEven features
+
 ## 2025-10-20 [*](https://github.com/David-Parry/ai-assited/pull/53)
 
 ### Added
