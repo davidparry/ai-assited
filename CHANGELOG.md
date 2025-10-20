@@ -1,3 +1,11 @@
+## 2025-10-20 [*](https://github.com/David-Parry/ai-assited/pull/53)
+
+### Added
+- Refactored benchmarking with structured results and console reporting
+- Introduced functional utilities (Validator) and Odd/Even categorization with tests
+- Added local LLM callers and improved sanitization via regex and streams
+- Expanded docs and demo checklists
+
 ## 2025-06-03 [*](https://github.com/David-Parry/ai-assited/pull/52)
 
 ### Added
