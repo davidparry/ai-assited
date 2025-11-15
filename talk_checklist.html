@@ -68,105 +68,39 @@
         background-color: var(--dracula-current-line);
     }
 
-    /* New styles for magnifying glass and popup */
-    .magnify-btn {
-        background: none;
-        border: none;
-        color: var(--dracula-purple);
-        cursor: pointer;
-        padding: 4px;
-        margin-left: 8px;
-        font-size: 16px;
+    /* New styles for copy functionality */
+    .copy-container {
+        position: relative;
+        display: flex;
+        align-items: start;
+        gap: 8px;
     }
 
-    .magnify-btn:hover {
+    .copy-btn {
+        background-color: var(--dracula-purple);
+        color: var(--dracula-background);
+        border: none;
+        border-radius: 4px;
+        padding: 4px 8px;
+        cursor: pointer;
+        font-size: 12px;
+        transition: opacity 0.2s;
+    }
+
+    .copy-btn:hover {
         opacity: 0.8;
     }
 
-    .popup-overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.7);
-        z-index: 1000;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .popup-content {
-        background-color: var(--dracula-background);
-        border-radius: 4px;
-        position: relative;
-        border: 1px solid var(--dracula-border);
-        display: inline-block;
-    }
-
-    .popup-content pre {
-        margin: 15px;
-        font-size: 4em;
-        line-height: 1.5;
-        background-color: var(--dracula-current-line);
-        padding: 2px;
-        border-radius: 4px;
-        overflow: auto;
-    }
-
-    .close-popup {
-        position: absolute;
-        top: 2px;
-        right: 2px;
-        background: none;
-        border: none;
-        color: var(--dracula-purple);
-        cursor: pointer;
-        font-size: 20px;
-        z-index: 1001;
-    }
-
-    .instruction-container {
-        display: flex;
-        align-items: start;
-        justify-content: space-between;
+    .copy-btn.copied {
+        background-color: #50fa7b;
     }
 
     .content-wrapper {
         flex-grow: 1;
     }
-    
-    /* Style for clipboard notification */
-    .clipboard-notification {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background-color: var(--dracula-current-line);
-        color: var(--dracula-foreground);
-        padding: 10px 20px;
-        border-radius: 4px;
-        z-index: 1002;
-        opacity: 0;
-        transition: opacity 0.3s ease-in-out;
-    }
-    
-    .clipboard-notification.show {
-        opacity: 1;
-    }
 </style>
 </head>
 <body>
-
-<div id="popup" class="popup-overlay">
-    <div class="popup-content">
-        <button class="close-popup">&times;</button>
-        <pre id="popup-text"></pre>
-    </div>
-</div>
-
-<div id="clipboard-notification" class="clipboard-notification">
-    Copied to clipboard!
-</div>
 
 <h2>Demo Checklist</h2>
 
@@ -204,7 +138,12 @@
         <td><input type="checkbox"/></td>
         <td>Onboarding</td>
         <td>
-            <pre><code>how do you run this project?</code></pre>
+            <div class="copy-container">
+                <div class="content-wrapper">
+                    <pre><code>how do you run this project?</code></pre>
+                </div>
+                <button class="copy-btn">Copy</button>
+            </div>
         </td>
         <td>
             <a href="images/run.png">/ask</a>
@@ -219,7 +158,12 @@
         <td><input type="checkbox"/></td>
         <td>Onboarding</td>
         <td>
-            <pre><code>read the file system after gather project information, explain this project its architecture and design.</code></pre>
+            <div class="copy-container">
+                <div class="content-wrapper">
+                    <pre><code>explain this project.</code></pre>
+                </div>
+                <button class="copy-btn">Copy</button>
+            </div>
         </td>
         <td>
             <a href="images/explain.png">/ask</a>
@@ -243,7 +187,7 @@
             <a href="best_practices_for_ai_tools.md#3-use-predefined-commands-to-enhance-precision">3</a>,
             <a href="best_practices_for_ai_tools.md#4-seek-clarifications-and-explanations-when-needed">4</a>
         </td>
-        <td>Qodo Gen</td>
+        <td>AI Assistant</td>
     </tr>
     <tr>
         <td><input type="checkbox"/></td>
@@ -274,7 +218,12 @@
         <td><input type="checkbox"/></td>
         <td>Code</td>
         <td>
-            <pre><code>implement the scrub requirements from the javadoc in Scrubber interface in the LogCleaner</code></pre>
+            <div class="copy-container">
+                <div class="content-wrapper">
+                    <pre><code>implement the scrub requirements from the javadoc in Scrubber interface in the LogCleaner</code></pre>
+                </div>
+                <button class="copy-btn">Copy</button>
+            </div>
         </td>
         <td>
             <a href="images/imperative_resp.png">/ask</a>
@@ -283,13 +232,17 @@
             <a href="best_practices_for_ai_tools.md#1-break-requests-into-smaller-focused-units-of-work">1</a>,
             <a href="best_practices_for_ai_tools.md#2-provide-context-and-use-previous-conversations">2</a>
         </td>
-        <td>Qodo Gen</td>
+        <td>Copilot</td>
     </tr>
     <tr>
         <td><input type="checkbox"/></td>
         <td>Code</td>
         <td>
-            <pre><code>implement the scrub requirements from the javadoc in Scrubber interface in the DataSanitizer</code></pre>
+            <div class="content-wrapper">
+                <pre><code>implement the scrub requirements from the javadoc in Scrubber interface in the DataSanitizer</code></pre>
+            </div>
+            <button class="copy-btn">Copy</button>
+            </div>
         </td>
         <td>
             <a href="images/declarative.png">/ask</a>
@@ -331,8 +284,14 @@ rerun Benchmark if time permits</code></pre>
         <td><input type="checkbox"/></td>
         <td>Judge(Model vs Model)</td>
         <td>
-            <pre><code>implement the javadoc requirement
+            <div class="content-wrapper">
+             <pre><code>implement the javadoc requirement
 judge the response grade it from A - F tell me your grade and if it is less than A- then give your correction to make it an A+</code></pre>
+            </div>
+            <button class="copy-btn">Copy</button>
+            </div>
+
+
         </td>
         <td>
             <a href="images/model_grade.png">/ask</a>
@@ -357,96 +316,38 @@ judge the response grade it from A - F tell me your grade and if it is less than
 </table>
 
 <script>
-    // Add popup functionality
-    document.addEventListener('DOMContentLoaded', function() {
-        const popup = document.getElementById('popup');
-        const popupText = document.getElementById('popup-text');
-        const closePopup = document.querySelector('.close-popup');
-        const clipboardNotification = document.getElementById('clipboard-notification');
+    document.querySelectorAll('.copy-btn').forEach(button => {
+        button.addEventListener('click', async () => {
+            // Get the content container
+            const container = button.previousElementSibling;
+            let textToCopy;
 
-        // Function to show clipboard notification
-        function showClipboardNotification() {
-            clipboardNotification.classList.add('show');
-            setTimeout(() => {
-                clipboardNotification.classList.remove('show');
-            }, 2000);
-        }
-
-        // Add magnifying glass to each instruction cell
-        document.querySelectorAll('td:nth-child(3)').forEach(cell => {
-            // Skip if cell already has an instruction-container
-            if (cell.querySelector('.instruction-container')) return;
-
-            const content = cell.innerHTML;
-            // Skip empty cells or cells without meaningful content
-            if (!content.trim()) return;
-
-            const container = document.createElement('div');
-            container.className = 'instruction-container';
-
-            // Create the content wrapper
-            const contentWrapper = document.createElement('div');
-            contentWrapper.className = 'content-wrapper';
-            contentWrapper.innerHTML = content;
-
-            // Create the magnify button
-            const magnifyBtn = document.createElement('button');
-            magnifyBtn.className = 'magnify-btn';
-            magnifyBtn.innerHTML = '🔍';
-            magnifyBtn.onclick = function(e) {
-                e.stopPropagation();
-
-                // Extract only the text content from code elements
-                let textContent;
-                const codeElement = cell.querySelector('pre code');
-                if (codeElement) {
-                    textContent = codeElement.textContent;
-                } else {
-                    // For cells without code elements, get the text content
-                    // but exclude the magnify button text
-                    const tempDiv = document.createElement('div');
-                    tempDiv.innerHTML = content;
-                    // Remove any magnify buttons from the temp div
-                    const magnifyBtns = tempDiv.querySelectorAll('.magnify-btn');
-                    magnifyBtns.forEach(btn => btn.remove());
-                    textContent = tempDiv.textContent.trim();
-                }
-
-                // Copy text to clipboard
-                navigator.clipboard.writeText(textContent)
-                    .then(() => {
-                        showClipboardNotification();
-                    })
-                    .catch(err => {
-                        console.error('Could not copy text: ', err);
-                    });
-
-                popupText.textContent = textContent;
-                popup.style.display = 'flex';
-            };
-
-            container.appendChild(contentWrapper);
-            container.appendChild(magnifyBtn);
-            cell.innerHTML = '';
-            cell.appendChild(container);
-        });
-
-        // Close popup when clicking the close button
-        closePopup.onclick = function() {
-            popup.style.display = 'none';
-        };
-
-        // Close popup when clicking outside
-        popup.onclick = function(e) {
-            if (e.target === popup) {
-                popup.style.display = 'none';
+            // Check if the container has a pre/code element
+            const codeElement = container.querySelector('code');
+            if (codeElement) {
+                textToCopy = codeElement.textContent;
+            } else {
+                textToCopy = container.textContent;
             }
-        };
 
-        // Close popup with Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                popup.style.display = 'none';
+            try {
+                await navigator.clipboard.writeText(textToCopy);
+
+                // Visual feedback
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+
+                // Reset button after 2 seconds
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                    button.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                console.error('Failed to copy text:', err);
+                button.textContent = 'Failed!';
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                }, 2000);
             }
         });
     });

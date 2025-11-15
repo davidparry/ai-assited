@@ -1,0 +1,7 @@
+{
+    "chat.agent.maxRequests": 25,
+     "github.copilot.workspaceExclusions": [
+    "**/claude_desktop_config.json",
+    "**/Library/Application Support/Claude/**"
+  ]
+}

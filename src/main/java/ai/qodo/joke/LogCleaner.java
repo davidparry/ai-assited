@@ -1,21 +1,16 @@
 package ai.qodo.joke;
 
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class LogCleaner implements Scrubber {
 
     @Override
     public String scrub(String joke) {
-        if (joke == null) {
-            throw new NullPointerException("Input joke cannot be null");
-        }
+        Objects.requireNonNull(joke, "Log content to be scrubbed cannot be null");
 
-        String result = joke;
-        for (String swearWord : swearWords) {
-            String regex = "(?i)\\b" + Pattern.quote(swearWord) + "\\b";
-            result = result.replaceAll(regex, REDACTED_WORD);
-        }
-        return result;
+        return swearWords.stream()
+                .reduce(joke, (text, word) -> Pattern.compile("\\b" + Pattern.quote(word) + "\\b", Pattern.CASE_INSENSITIVE)
+                        .matcher(text).replaceAll(REDACTED_WORD), (s1, s2) -> s1);
     }
-
 }

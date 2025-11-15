@@ -1,30 +1,19 @@
 package ai.qodo.joke;
 
-
-import java.util.Arrays;
 import java.util.Objects;
-import java.util.stream.Collectors;
+import java.util.regex.Pattern;
 
 public class DataSanitizer implements Scrubber {
 
     @Override
     public String scrub(String joke) {
-        Objects.requireNonNull(joke, "Input joke cannot be null");
-
-        if (joke.isEmpty()) {
-            return joke;
+        Objects.requireNonNull(joke, "Input joke must not be null");
+        // Replace each swear word (case-insensitive, whole word) with REDACTED_WORD
+        var jokeText = joke;
+        for (var swear : swearWords) {
+            var pattern = Pattern.compile("\\b" + Pattern.quote(swear) + "\\b", Pattern.CASE_INSENSITIVE);
+            jokeText = pattern.matcher(jokeText).replaceAll(REDACTED_WORD);
         }
-
-        return Arrays.stream(joke.split("\\s+"))
-                .map(this::scrubWord)
-                .collect(Collectors.joining(" "));
+        return jokeText;
     }
-
-    private String scrubWord(String word) {
-        return swearWords.stream()
-                .anyMatch(swear -> word.toLowerCase().equals(swear.toLowerCase()))
-                ? REDACTED_WORD
-                : word;
-    }
-
 }
